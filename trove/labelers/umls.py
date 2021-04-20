@@ -96,8 +96,8 @@ class UMLS:
             ).groupby(['SAB'])
 
             for sab, data in df:
-                if sab in filter_sabs:
-                    continue
+                if sab in filter_sabs or str.encode(sab) in filter_sabs:
+                    continue                
                 yield sab, data.filter(items=['TERM', type_mapping]).values
 
         elif self.backend == 'sqlite':
